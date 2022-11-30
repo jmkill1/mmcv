@@ -1,0 +1,39 @@
+[{
+    "operator": "lerp",
+    "case_name": "lerp_test_case1",
+    "inputs": {
+        "x": {
+            "dtype": "float32",
+            "shape": "[-1L, 102400L]",
+            "type": "Tensor"
+        },
+        "y": {
+            "dtype": "float32",
+            "shape": "[-1L, 102400L]",
+            "type": "Tensor"
+        },
+        "w": {
+            "type": "float32",
+            "value": "0.2"
+        }
+    }
+}, {
+    "op": "lerp",
+    "case_name": "lerp_test_case2",
+    "inputs": {
+        "x": {
+            "dtype": "float32",
+            "shape": "[16L, 1L, 1L, 1L]",
+            "type": "Tensor"
+        },
+        "y": {
+            "dtype": "float32",
+            "shape": "[16L, 3L, 224L, 224L]",
+            "type": "Tensor"
+        },
+        "w": {
+            "type": "float32",
+            "value": "0.5"
+        }
+    }
+}]

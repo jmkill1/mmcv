@@ -1,0 +1,44 @@
+[{
+    "operator": "broadcast_tensors2",
+    "case_name":"test_case_1",
+    "inputs": {
+        "input0": {
+            "dtype": "float32",
+            "shape": "[1L, 200L, 300L, 400L]",
+            "type": "Tensor"
+        },
+        "input1": {
+            "dtype": "float32",
+            "shape": "[1L, 200L, 1L, 400L]",
+            "type": "Tensor"
+        },
+        "input2": {
+            "dtype": "float32",
+            "shape": "[1L, 1L, 300L, 1L]",
+            "type": "Tensor"
+        }
+    },
+    "repeat_time": 5000
+},{
+    "operator": "broadcast_tensors",
+    "case_name":"test_case_2",
+    "inputs": {
+        "input0": {
+            "dtype": "float32",
+            "shape": "[1L, 12, 300L, 400L]",
+            "type": "Tensor"
+        },
+        "input1": {
+            "dtype": "float32",
+            "shape": "[1L, 13, 1L, 400L]",
+            "type": "Tensor"
+        },
+        "input2": {
+            "dtype": "float32",
+            "shape": "[1L, 1L, 300L, 1L]",
+            "type": "Tensor"
+        }
+    },
+    "repeat_time": 5000
+}
+]
