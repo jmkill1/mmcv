@@ -4,7 +4,14 @@ class LerpConfig(OperatorConfig):
     def __init__(self):
         super(LerpConfig, self).__init__("lerp")
         
+class TorchLerp(OpBenchmarkBase):
+    def build_graph(self, config):
+        x = self.variable(name='x', shape=config.x_shape, dtype=config.x_dtype)
+        y = self.variable(name='y', shape=config.y_shape, dtype=config.y_dtype)
+
+        self.feed_list = [x, y]
+
+        
 if __name__ == "__main__":
-    lerp_config = LerpConfig()
-    lerp_config.init_config()
+    test_main(op_obj=TorchLerp, config=LerpConfig)
     print("_____")

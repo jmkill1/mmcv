@@ -1,5 +1,4 @@
 from __future__ import print_function
-import torch
 import argparse
 import os
 import json
@@ -20,6 +19,7 @@ def _check_gpu_device(use_gpu):
         assert len(gpu_devices.split(",")) == 1
     else:
         assert gpu_devices == "", "export CUDA_VISIBLE_DEVICES=\"\" to test CPU performance."
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -83,7 +83,7 @@ def parse_args():
     return args
 
 
-def test_main(config=None):
+def test_main(op_obj=None, config=None):
     assert config is not None, "Operator json config must be set."
 
     def _test_with_json_impl(config_id, unknown_dim,
@@ -91,14 +91,14 @@ def test_main(config=None):
         if convert_to_fp16:
             config.convert_to_fp16()
         config.load_input_from_json(config_id, unknown_dim)
-        test_main_without_json(config)
-        
+        test_main_without_json(op_obj, config)
+
     args = parse_args()
-    
+
     if args.config_id is not None and args.config_id >= 0:
         _test_with_json_impl(args.config_id, args.unknown_dim,
-                                args.convert_to_fp16)
-    
+                             args.convert_to_fp16)
+
 
 def _adaptive_repeat(config, args):
     if args.allow_adaptive_repeat and hasattr(
@@ -119,74 +119,8 @@ def _check_disabled(config, args):
         return True
     return False
 
-def generate_random_data(shape, dtype):
-    if dtype == "int64" or dtype == "int32":
-        data = np.random.randint(100, size=shape, dtype=dtype)
-        if range is not None:
-            data = np.random.randint(
-                range[0], range[1], size=shape, dtype=dtype)
-    elif dtype == "bool":
-        data = np.random.randint(2, size=shape, dtype=bool)
-    elif dtype == "uint8" or dtype == "uint16":
-        data = np.random.randint(0, 100, size=shape, dtype=dtype)
-        range_low = max(0, range[0])
-        if range is not None:
-            data = np.random.randint(
-                range_low, range[1], size=shape, dtype=dtype)
-    else:
-        data = np.random.random(shape).astype(dtype)
-        if range is not None:
-            data = range[0] + (range[1] - range[0]) * data
-    return data
-    
-def run(data, config, args):
-    if args.use_gpu and torch.cuda.is_available():
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
-    outputs, stats = run_impl(
-        use_gpu=args.use_gpu,
-        config=config,
-        repeat=args.repeat,
-        profiler=args.profiler)
-    return outputs, stats
 
-def run_impl(self, use_gpu, config, repeat=1, profiler="none"):
-        def _run_main_iter():
-            self.build_graph(config=config)
-            if use_gpu:
-                torch.cuda.synchronize(self._device)
-
-            outputs = None
-            if self._need_fetch:
-                outputs = []
-                for var in self.fetch_list:
-                    if isinstance(var, torch.Tensor):
-                        outputs.append(var.to("cpu").detach().numpy())
-                    elif isinstance(var, list):
-                        outputs.append(np.array(var))
-                    else:
-                        outputs.append(np.array([var]))
-            return outputs
-
-        # warmup run
-        _run_main_iter()
-
-        runtimes = []
-        fetches = []
-        self._status = IN_RUN
-        with profile_context(self.name, use_gpu, profiler):
-            for i in range(repeat):
-                begin = time.time()
-                outputs = _run_main_iter()
-                runtimes.append(time.time() - begin)
-
-        self._status = AFTER_RUN
-        stats = self.get_running_stats(use_gpu, config, runtimes)
-        return outputs, stats
-    
-
-def test_main_without_json(config=None):
+def test_main_without_json(op_obj=None, config=None):
     assert config is not None, "Operator config must be set."
 
     args = parse_args()
@@ -195,22 +129,21 @@ def test_main_without_json(config=None):
 
     _adaptive_repeat(config, args)
     config.backward = args.backward
-    feeder_adapter = None 
-    op = config.op_name
+    assert op_obj is not None, "Operator object is None."
+    import torch
     try:
         from mmcv.ops import op
     except Exception as e:
         sys.stderr.write(
             "Cannot import torch or mmcv.ops.(%s), maybe pytorch or mmcv is not installed.\n", op)
+    print(config)
+    op_obj.generate_random_data(config)
+    outputs, status = op_obj.run(config, args)
 
-    
-    data = generate_random_data(config)
-    run(data)
-
-    if args.task == "speed":
-        torch_stats["gpu_time"] = args.gpu_time
-        utils.print_benchmark_result(
-            torch_stats,
+    if args.gpu_time is not None:
+        status["gpu_time"] = args.gpu_time
+        print_benchmark_result(
+            status,
             task=args.task,
             log_level=args.log_level,
             config_params=config.to_string())

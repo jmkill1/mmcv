@@ -5,3 +5,4 @@ print(package_path)
 sys.path.append(package_path)
 from common.operatorconfig import OperatorConfig
 from common.main import test_main
+from common.op_benchmark import OpBenchmarkBase
