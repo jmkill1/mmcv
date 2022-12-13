@@ -1,8 +1,8 @@
 from common.utils import *
-from common.attrsinfo import AttrsInfo
+from common.attrinfo import AttrInfo
 
 
-class TensorInfo(AttrsInfo):
+class TensorInfo(AttrInfo):
     def __init__(self, name, type, dtype, shape, lod_level=0):
         self.name = self.trans2str(name)
         self.type = self.trans2str(type)
@@ -23,17 +23,7 @@ class TensorInfo(AttrsInfo):
         return True
 
     def to_string(self):
-        if self.type == "Variable":
-            return self.name + " (Variable) - dtype: " + str(
+        if self.type == "Tensor":
+            return self.name + " (Tensor) - dtype: " + str(
                 self.dtype) + ", shape: " + str(self.shape)
-        elif self.type == "list<Variable>":
-            str_list = "%s (list<Variable>[%d]) - " % (self.name,
-                                                       len(self.dtype))
-            if self._is_same(self.dtype) and self._is_same(self.shape):
-                params_len = 1
-            else:
-                params_len = len(self.dtype)
-            for i in range(params_len):
-                str_list = str_list + "dtype: " + str(self.dtype[
-                    i]) + ", shape: " + str(self.shape[i]) + "; "
-            return str_list
+        

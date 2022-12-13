@@ -1,5 +1,5 @@
 from common.utils import *
-class AttrsInfo(object):
+class AttrInfo(object):
     def __init__(self, name, type, value):
         self.name = self.trans2str(name)
         self.type = self.trans2str(type)

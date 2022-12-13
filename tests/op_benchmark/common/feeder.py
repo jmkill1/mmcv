@@ -49,13 +49,7 @@ def check_shape_and_dtype(shape, dtype, value):
     return value
 
 
-def generate_random_data(shape, dtype, range=None, value=None):
-    if range is not None:
-        if not isinstance(range, tuple) and not isinstance(range, list):
-            raise TypeError("Expected range a tuple or a list, received a ",
-                            type(range))
-        assert len(range) == 2
-
+def generate_random_data(shape, dtype, value=None):
     if value is not None:
         if isinstance(value, list):
             value = np.array(value)
@@ -74,14 +68,8 @@ def generate_random_data(shape, dtype, range=None, value=None):
             data = np.random.randint(2, size=shape, dtype=bool)
         elif dtype == "uint8" or dtype == "uint16":
             data = np.random.randint(0, 100, size=shape, dtype=dtype)
-            range_low = max(0, range[0])
-            if range is not None:
-                data = np.random.randint(
-                    range_low, range[1], size=shape, dtype=dtype)
         else:
             data = np.random.random(shape).astype(dtype)
-            if range is not None:
-                data = range[0] + (range[1] - range[0]) * data
     return data
 
 

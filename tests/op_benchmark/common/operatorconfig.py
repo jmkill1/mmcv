@@ -2,7 +2,7 @@ import os
 import json
 from operator import attrgetter
 from common.utils import *
-from common.attrsinfo import AttrsInfo
+from common.attrinfo import AttrInfo
 from common.tensorInfo import TensorInfo
 
 class OperatorConfig(object):
@@ -56,7 +56,7 @@ class OperatorConfig(object):
                 self.repeat = parse_int(data[config_id]["repeat_time"])
 
         self._parse_inputs()
-        for param in self.attrs_list:
+        for param in self.attr_list:
             setattr(self, param.name, param.value)
         for var in self.tensor_list:
             for i in range(len(var.shape)):
@@ -71,10 +71,10 @@ class OperatorConfig(object):
 
     def _parse_inputs(self):
         self.tensor_list = []
-        self.attrs_list = []
+        self.attr_list = []
         if self.inputs is None:
             self.tensor_list = None
-            self.attrs_list = None
+            self.attr_list = None
         else:
             for name, value in self.inputs.items():
                 assert value.get("type", None) is not None
@@ -83,8 +83,8 @@ class OperatorConfig(object):
                                         value["shape"])
                     self.tensor_list.append(tensor_info)
                 else:
-                    attrs_info = AttrsInfo(name, value["type"], value["value"])
-                    self.attrs_list.append(attrs_info)
+                    attr_info = AttrInfo(name, value["type"], value["value"])
+                    self.attr_list.append(attr_info)
 
     def convert_to_fp16(self):
         """
@@ -106,3 +106,22 @@ class OperatorConfig(object):
                     if _is_floating_point_type(var.dtype[i]):
                         var.dtype[i] = "float16"
                 setattr(self, var.name + "_dtype", var.dtype)
+    def to_string(self):
+        if self.tensor_list is None and self.attr_list is None:
+            self._parse_inputs()
+        if self.attr_list is None and self.tensor_list is None:
+            return "None"
+        params_str = ""
+        print(self.tensor_list)
+        print(self.attr_list)
+        self.tensor_list = sorted(self.tensor_list, key=attrgetter('name'))
+        self.attr_list = sorted(self.attr_list, key=attrgetter('name'))
+        if self.tensor_list is not None:
+            for var in self.tensor_list :
+                print(type(var))
+                params_str = params_str + var.to_string() + "\n"
+        if self.attr_list is not None:
+            for attr in self.attr_list :
+                params_str = params_str + attr.to_string() + "\n"
+        return params_str
+        

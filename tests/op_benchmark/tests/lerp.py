@@ -9,9 +9,13 @@ class TorchLerp(OpBenchmarkBase):
         x = self.variable(name='x', shape=config.x_shape, dtype=config.x_dtype)
         y = self.variable(name='y', shape=config.y_shape, dtype=config.y_dtype)
 
-        self.feed_list = [x, y]
-
         
 if __name__ == "__main__":
-    test_main(op_obj=TorchLerp, config=LerpConfig)
+    # test_main(op_obj=TorchLerp(), config=LerpConfig())
+   
+    # config = LerpConfig()
+    # config.init_config()
+    # print(config.to_string())
+    # print(config.w)
+    
     print("_____")

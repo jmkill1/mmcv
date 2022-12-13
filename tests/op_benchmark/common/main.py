@@ -12,13 +12,13 @@ from common.utils import *
 # from common import special_op_list
 
 
-def _check_gpu_device(use_gpu):
-    gpu_devices = os.environ.get("CUDA_VISIBLE_DEVICES", None)
-    if use_gpu:
-        assert gpu_devices, "export CUDA_VISIBLE_DEVICES=\"x\" to test GPU performance."
-        assert len(gpu_devices.split(",")) == 1
-    else:
-        assert gpu_devices == "", "export CUDA_VISIBLE_DEVICES=\"\" to test CPU performance."
+# def _check_gpu_device(use_gpu):
+#     gpu_devices = os.environ.get("CUDA_VISIBLE_DEVICES", None)
+#     if use_gpu:
+#         assert gpu_devices, "export CUDA_VISIBLE_DEVICES=\"x\" to test GPU performance."
+#         assert len(gpu_devices.split(",")) == 1
+#     else:
+#         assert gpu_devices == "", "export CUDA_VISIBLE_DEVICES=\"\" to test CPU performance."
 
 
 def parse_args():
@@ -78,26 +78,20 @@ def parse_args():
 
     args = parser.parse_args()
 
-    _check_gpu_device(args.use_gpu)
+    # _check_gpu_device(args.use_gpu)
     print(args)
     return args
 
 
 def test_main(op_obj=None, config=None):
     assert config is not None, "Operator json config must be set."
-
-    def _test_with_json_impl(config_id, unknown_dim,
-                             convert_to_fp16):
-        if convert_to_fp16:
-            config.convert_to_fp16()
-        config.load_input_from_json(config_id, unknown_dim)
-        test_main_without_json(op_obj, config)
-
     args = parse_args()
 
     if args.config_id is not None and args.config_id >= 0:
-        _test_with_json_impl(args.config_id, args.unknown_dim,
-                             args.convert_to_fp16)
+        if args.convert_to_fp16:
+            config.convert_to_fp16()
+        config.init_config(args.config_id, args.unknown_dim)
+        test_main_without_json(op_obj, config)
 
 
 def _adaptive_repeat(config, args):
@@ -124,26 +118,18 @@ def test_main_without_json(op_obj=None, config=None):
     assert config is not None, "Operator config must be set."
 
     args = parse_args()
-    if _check_disabled(config, args):
-        return
+
 
     _adaptive_repeat(config, args)
     config.backward = args.backward
     assert op_obj is not None, "Operator object is None."
-    import torch
-    try:
-        from mmcv.ops import op
-    except Exception as e:
-        sys.stderr.write(
-            "Cannot import torch or mmcv.ops.(%s), maybe pytorch or mmcv is not installed.\n", op)
+    
     print(config)
-    op_obj.generate_random_data(config)
     outputs, status = op_obj.run(config, args)
 
     if args.gpu_time is not None:
         status["gpu_time"] = args.gpu_time
         print_benchmark_result(
             status,
-            task=args.task,
             log_level=args.log_level,
             config_params=config.to_string())

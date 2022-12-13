@@ -1,0 +1,25 @@
+[{
+    "operator": "nms",
+    "case_name": "nms_test_case1",
+    "inputs": {
+        "boxes": {
+            "dtype": "float32",
+            "shape": "[4L, 4L]",
+            "type": "Tensor"
+        },
+        "scores": {
+            "dtype": "float32",
+            "shape": "[4L]",
+            "type": "Tensor"
+        },
+        "iou_threshold": {
+            "type": "float32",
+            "value": "0.3"
+        },
+        "offset": {
+            "type": "int",
+            "value": "0"
+        }
+    }
+}
+]
