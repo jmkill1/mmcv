@@ -3,7 +3,7 @@ import time
 import importlib
 import contextlib
 
-from common import feeder
+from common.utils import *
 
 
 try:
@@ -28,50 +28,42 @@ def profile_context(name, use_gpu, profiler):
 
 
 class OpBenchmarkBase():
-    def __init__(self):
+    def __init__(self, func):
         self.__inputs_dict = {}
         self.__generated_feed_values = []
-        self.__feed_dict = {}
         self.__status = BEFORE_RUN
-        self.__test_func = None
+        self.__test_func = func
         self.__test_kwargs = None
-        self.__outputs = None
+        self.__outputs_list = None
 
     def build_graph(self, config=None):
-        if self.__test_func is None or self.__test_kwargs is None:
-            op = config.op_name
-            assert op is not None
-            print(op)
-            try:
-                from mmcv.ops import op
-            except Exception as e:
-                sys.stderr.write(
-                    "Cannot import mmcv.ops, maybe mmcv is not installed.\n")
-            self.__test_func = op
+        if self.__test_kwargs is None:
+            assert config.op_name is not None
             self.__test_kwargs = {}
 
-            self.feed_list = []
+            self.inputs_list = []
             for var in config.tensor_list:
                 var_shape = getattr(config, var.name + '_shape')
                 var_dtype = getattr(config, var.name + '_dtype')
                 arg_name = var.name
                 feed_var = self.variable(
                     name=var.name, shape=var_shape, dtype=var_dtype)
-                self._[arg_name] = feed_var
-                self.feed_list.append(feed_var)
+                self.__test_kwargs[arg_name] = feed_var
+                self.inputs_list.append(feed_var)
 
             for param in config.attr_list:
-                arg_name = var.name
-                self._[arg_name] = getattr(config, param.name)
+                arg_name = param.name
+                self.__test_kwargs[arg_name] = getattr(config, param.name)
+                self.inputs_list.append(getattr(config, param.name))
 
-        outputs = self.__test_func(**self.__test_kwargs)
-        self.__outputs = outputs if isinstance(outputs, list) else [outputs]
+        outputs = self.__test_func(*self.inputs_list)
+        self.__outputs_list = outputs if isinstance(outputs, list) else [outputs]
 
     def variable(self, name, shape, dtype, value=None, stop_gradient=False):
         if self.__status == BEFORE_RUN:
             assert shape is not None
 
-            feed_value = feeder.generate_random_data(
+            feed_value = generate_random_data(
                 shape, dtype, value=value)
             requires_grad = True
             if stop_gradient or dtype not in ["float16", "float32", "float64"]:
@@ -81,12 +73,12 @@ class OpBenchmarkBase():
                 feed_value, requires_grad=requires_grad, device=self._device)
             if requires_grad:
                 var.retain_grad()
-            self.__feed_dict[name] = var
+            self.__inputs_dict[name] = var
 
             if value is None:
                 self.__generated_feed_values.append(feed_value)
         else:
-            var = self.__feed_dict[name]
+            var = self.__inputs_dict[name]
         return var
 
     def run_impl(self, use_gpu, config, repeat=1, profiler="none"):
@@ -104,7 +96,7 @@ class OpBenchmarkBase():
             for i in range(repeat):
                 begin = time.time()
                 _run_main_iter()
-                outputs = self.__outputs
+                outputs = self.__outputs_list
                 runtimes.append(time.time() - begin)
 
         self.__status = AFTER_RUN

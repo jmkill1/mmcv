@@ -71,6 +71,29 @@ def parse_tuple(value_str, sub_dtype="int"):
         # TODO: check and support list of other data type.
         raise ValueError("Do not support parsing list of non-int data type.")
     
+def generate_random_data(shape, dtype, value=None):
+    if value is not None:
+        if isinstance(value, list):
+            value = np.array(value)
+        assert isinstance(
+            value, np.ndarray
+        ), "Expected value's type to be numpy.ndarray, but recieved {}.".format(
+            type(value))
+        data = check_shape_and_dtype(shape, dtype, value)
+    else:
+        if dtype == "int64" or dtype == "int32":
+            data = np.random.randint(100, size=shape, dtype=dtype)
+            if range is not None:
+                data = np.random.randint(
+                    range[0], range[1], size=shape, dtype=dtype)
+        elif dtype == "bool":
+            data = np.random.randint(2, size=shape, dtype=bool)
+        elif dtype == "uint8" or dtype == "uint16":
+            data = np.random.randint(0, 100, size=shape, dtype=dtype)
+        else:
+            data = np.random.random(shape).astype(dtype)
+    return data
+    
 def print_benchmark_result(result,
                            task="speed",
                            log_level=0,

@@ -1,0 +1,38 @@
+[{
+    "operator": "roi_align",
+    "case_name": "roi_align_test_case1",
+    "inputs": {
+        "input": {
+            "dtype": "float32",
+            "shape": "[1L, 1L, 2L, 2L]",
+            "type": "Tensor"
+        },
+        "rois": {
+            "dtype": "float32",
+            "shape": "[1L, 5L]",
+            "type": "Tensor"
+        },
+        "output_size": {
+            "type": "tuple",
+            "value": "(2, 2)"
+        },
+        "spatial_scale": {
+            "type": "float32",
+            "value": "1.0"
+        },
+        "sampling_ratio": {
+            "type": "int",
+            "value": "2"
+        },
+        "pool_mode": {
+            "type": "str",
+            "value": "avg"
+        },
+        "aligned": {
+            "type": "bool",
+            "value": "True"
+        }
+    },
+    "repeat": 1000
+}
+]
