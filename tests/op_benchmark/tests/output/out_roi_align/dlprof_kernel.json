@@ -1,0 +1,35 @@
+{
+  "Kernel Report" : 
+  {
+    "\"roi_align_forward_cuda_kernel\"" : 
+    {
+      "Avg API Time (ns)" : 16281,
+      "Avg GPU Time (ns)" : 7200,
+      "Direction" : "",
+      "Max API Time (ns)" : 16281,
+      "Max GPU Time (ns)" : 7200,
+      "Min API Time (ns)" : 16281,
+      "Min GPU Time (ns)" : 7200,
+      "Op ID" : "\"ROI_ALIGN_FORWARD_CUDA_KERNEL_999\"",
+      "Op Name" : "\"unassociated_roi_align_forward_cuda_kernel\"",
+      "Total API Time (ns)" : 16281,
+      "Total GPU Time (ns)" : 7200,
+      "Uses TC" : "no"
+    },
+    "\"vectorized_elementwise_kernel\"" : 
+    {
+      "Avg API Time (ns)" : 16616,
+      "Avg GPU Time (ns)" : 2656,
+      "Direction" : "fprop",
+      "Max API Time (ns)" : 16616,
+      "Max GPU Time (ns)" : 2656,
+      "Min API Time (ns)" : 16616,
+      "Min GPU Time (ns)" : 2656,
+      "Op ID" : "\"NEW_ZEROS_997\"",
+      "Op Name" : "\"/module/test_main/test_main_without_json/RoiAlignBenchmark::run/RoiAlignBenchmark::run_impl/RoiAlignBenchmark::_run_main_iter[2]/RoiAlignBenchmark::build_graph/forward/new_zeros\"",
+      "Total API Time (ns)" : 16616,
+      "Total GPU Time (ns)" : 2656,
+      "Uses TC" : "no"
+    }
+  }
+}

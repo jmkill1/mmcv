@@ -1,0 +1,1 @@
+{"exec_time": "2023-01-12 20:25:37.899023", "nms": {"avg_gpu_time_per": 0.00022242892384842478, "pass": true}, "roi_align": {"avg_gpu_time_per": 0.0, "pass": true}}

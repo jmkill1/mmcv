@@ -1,6 +1,7 @@
 [{
     "operator": "roi_align",
     "case_name": "roi_align_test_case1",
+    "cuda_name": "roi_align_forward_cuda_kernel",
     "inputs": {
         "input": {
             "dtype": "float32",

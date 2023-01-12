@@ -1,0 +1,25 @@
+{
+  "Expert Systems Feedback" : 
+  [
+    {
+      "Problem" : "\"The GPU is underutilized: Only 1.4% of the profiled time is spent on GPU kernel operations\"",
+      "Recommendation" : "\"\"Other\" has the highest (non-GPU) usage at 56.9%. Investigate framework and system overhead\""
+    },
+    {
+      "Problem" : "\"No DALI ops detected\"",
+      "Recommendation" : "\"Consider using NVIDIA DALI, a library that is a high performance alternative to built-in data loaders and data iterators. Learn more here: https://developer.nvidia.com/DALI\""
+    },
+    {
+      "Problem" : "\"Unable to split profile into training iterations: key op  not found\"",
+      "Recommendation" : "\"Specify key op by setting the --key_op argument\""
+    },
+    {
+      "Problem" : "\"PyTorch NVTX Context Manager was NOT detected.\"",
+      "Recommendation" : "\"PyTorch NVTX Context Manager is required to associate GPU performance data to the correct forward and backward propagation phase. Please add torch.autograd.profiler.emit_nvtx() to the training/inference loop. Refer to the DLProf User Guide for more information.\""
+    },
+    {
+      "Problem" : "\"GPU Memory is underutilized: Only 5% of GPU Memory is used\"",
+      "Recommendation" : "\"Try increasing batch size by 4x to increase data throughput\""
+    }
+  ]
+}

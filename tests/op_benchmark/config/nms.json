@@ -1,6 +1,7 @@
 [{
     "operator": "nms",
     "case_name": "nms_test_case1",
+    "cuda_name": "nms_cuda",
     "inputs": {
         "boxes": {
             "dtype": "float32",

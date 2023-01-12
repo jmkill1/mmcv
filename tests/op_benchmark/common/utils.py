@@ -183,3 +183,18 @@ def print_benchmark_result(result,
             status["speed"]["gbs"] = float(byte) * 1E-6 / avg_gpu_time
     status["parameters"] = config_params
     print(json.dumps(status))
+    
+def extract_data(op_name, op_cuda, path):
+    op_cuda = "{}{}{}".format("\"",op_cuda,"\"")
+    json_file_path = os.path.join(os.path.join(os.path.join(os.path.join(os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__))), path), "output"), "out_"+op_name), "dlprof_op_type.json")
+    avg_gpu_time = None
+    
+    with open(json_file_path, 'r') as f:
+        data = json.load(f)
+        avg_gpu_time = data["Op Type Summary Report"][op_cuda]["Avg. GPU Time (ns)"]
+    f.close
+    assert avg_gpu_time is not None, "Can't Get Avg. GPU Time (ns)"
+    return avg_gpu_time
+
+    

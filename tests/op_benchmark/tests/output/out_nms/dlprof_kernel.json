@@ -1,0 +1,170 @@
+{
+  "Kernel Report" : 
+  {
+    "\"CatArrayBatchedCopy\"" : 
+    {
+      "Avg API Time (ns)" : 18254,
+      "Avg GPU Time (ns)" : 3872,
+      "Direction" : "fprop",
+      "Max API Time (ns)" : 18254,
+      "Max GPU Time (ns)" : 3872,
+      "Min API Time (ns)" : 18254,
+      "Min GPU Time (ns)" : 3872,
+      "Op ID" : "\"CAT_999\"",
+      "Op Name" : "\"/module/test_main/test_main_without_json/NmsBenchmark::run/NmsBenchmark::run_impl/NmsBenchmark::_run_main_iter[2]/NmsBenchmark::build_graph/new_func/nms/cat\"",
+      "Total API Time (ns)" : 18254,
+      "Total GPU Time (ns)" : 3872,
+      "Uses TC" : "no"
+    },
+    "\"DeviceCompactInitKernel\"" : 
+    {
+      "Avg API Time (ns)" : 17202,
+      "Avg GPU Time (ns)" : 2784,
+      "Direction" : "",
+      "Max API Time (ns)" : 17202,
+      "Max GPU Time (ns)" : 2784,
+      "Min API Time (ns)" : 17202,
+      "Min GPU Time (ns)" : 2784,
+      "Op ID" : "\"DEVICECOMPACTINITKERNEL_999\"",
+      "Op Name" : "\"unassociated_DeviceCompactInitKernel\"",
+      "Total API Time (ns)" : 17202,
+      "Total GPU Time (ns)" : 2784,
+      "Uses TC" : "no"
+    },
+    "\"DeviceReduceSingleTileKernel\"" : 
+    {
+      "Avg API Time (ns)" : 7252,
+      "Avg GPU Time (ns)" : 3744,
+      "Direction" : "",
+      "Max API Time (ns)" : 7252,
+      "Max GPU Time (ns)" : 3744,
+      "Min API Time (ns)" : 7252,
+      "Min GPU Time (ns)" : 3744,
+      "Op ID" : "\"DEVICEREDUCESINGLETILEKERNEL_999\"",
+      "Op Name" : "\"unassociated_DeviceReduceSingleTileKernel\"",
+      "Total API Time (ns)" : 7252,
+      "Total GPU Time (ns)" : 3744,
+      "Uses TC" : "no"
+    },
+    "\"DeviceSelectSweepKernel\"" : 
+    {
+      "Avg API Time (ns)" : 11789,
+      "Avg GPU Time (ns)" : 4416,
+      "Direction" : "",
+      "Max API Time (ns)" : 11789,
+      "Max GPU Time (ns)" : 4416,
+      "Min API Time (ns)" : 11789,
+      "Min GPU Time (ns)" : 4416,
+      "Op ID" : "\"DEVICESELECTSWEEPKERNEL_999\"",
+      "Op Name" : "\"unassociated_DeviceSelectSweepKernel\"",
+      "Total API Time (ns)" : 11789,
+      "Total GPU Time (ns)" : 4416,
+      "Uses TC" : "no"
+    },
+    "\"bitonicSortKVInPlace\"" : 
+    {
+      "Avg API Time (ns)" : 7696,
+      "Avg GPU Time (ns)" : 11072,
+      "Direction" : "",
+      "Max API Time (ns)" : 7696,
+      "Max GPU Time (ns)" : 11072,
+      "Min API Time (ns)" : 7696,
+      "Min GPU Time (ns)" : 11072,
+      "Op ID" : "\"BITONICSORTKVINPLACE_999\"",
+      "Op Name" : "\"unassociated_bitonicSortKVInPlace\"",
+      "Total API Time (ns)" : 7696,
+      "Total GPU Time (ns)" : 11072,
+      "Uses TC" : "no"
+    },
+    "\"elementwise_kernel_with_index\"" : 
+    {
+      "Avg API Time (ns)" : 12126,
+      "Avg GPU Time (ns)" : 2816,
+      "Direction" : "",
+      "Max API Time (ns)" : 12126,
+      "Max GPU Time (ns)" : 2816,
+      "Min API Time (ns)" : 12126,
+      "Min GPU Time (ns)" : 2816,
+      "Op ID" : "\"ELEMENTWISE_KERNEL_WITH_INDEX_999\"",
+      "Op Name" : "\"unassociated_elementwise_kernel_with_index\"",
+      "Total API Time (ns)" : 12126,
+      "Total GPU Time (ns)" : 2816,
+      "Uses TC" : "no"
+    },
+    "\"gather_keep_from_mask\"" : 
+    {
+      "Avg API Time (ns)" : 5635,
+      "Avg GPU Time (ns)" : 4737,
+      "Direction" : "",
+      "Max API Time (ns)" : 5635,
+      "Max GPU Time (ns)" : 4737,
+      "Min API Time (ns)" : 5635,
+      "Min GPU Time (ns)" : 4737,
+      "Op ID" : "\"GATHER_KEEP_FROM_MASK_999\"",
+      "Op Name" : "\"unassociated_gather_keep_from_mask\"",
+      "Total API Time (ns)" : 5635,
+      "Total GPU Time (ns)" : 4737,
+      "Uses TC" : "no"
+    },
+    "\"indexSelectSmallIndex\"" : 
+    {
+      "Avg API Time (ns)" : 13926,
+      "Avg GPU Time (ns)" : 7007,
+      "Direction" : "",
+      "Max API Time (ns)" : 13926,
+      "Max GPU Time (ns)" : 7007,
+      "Min API Time (ns)" : 13926,
+      "Min GPU Time (ns)" : 7007,
+      "Op ID" : "\"INDEXSELECTSMALLINDEX_999\"",
+      "Op Name" : "\"unassociated_indexSelectSmallIndex\"",
+      "Total API Time (ns)" : 13926,
+      "Total GPU Time (ns)" : 7007,
+      "Uses TC" : "no"
+    },
+    "\"index_elementwise_kernel\"" : 
+    {
+      "Avg API Time (ns)" : 9263,
+      "Avg GPU Time (ns)" : 4160,
+      "Direction" : "",
+      "Max API Time (ns)" : 9263,
+      "Max GPU Time (ns)" : 4160,
+      "Min API Time (ns)" : 9263,
+      "Min GPU Time (ns)" : 4160,
+      "Op ID" : "\"INDEX_ELEMENTWISE_KERNEL_999\"",
+      "Op Name" : "\"unassociated_index_elementwise_kernel\"",
+      "Total API Time (ns)" : 9263,
+      "Total GPU Time (ns)" : 4160,
+      "Uses TC" : "no"
+    },
+    "\"nms_cuda\"" : 
+    {
+      "Avg API Time (ns)" : 14442,
+      "Avg GPU Time (ns)" : 4448,
+      "Direction" : "",
+      "Max API Time (ns)" : 14442,
+      "Max GPU Time (ns)" : 4448,
+      "Min API Time (ns)" : 14442,
+      "Min GPU Time (ns)" : 4448,
+      "Op ID" : "\"NMS_CUDA_999\"",
+      "Op Name" : "\"unassociated_nms_cuda\"",
+      "Total API Time (ns)" : 14442,
+      "Total GPU Time (ns)" : 4448,
+      "Uses TC" : "no"
+    },
+    "\"vectorized_elementwise_kernel\"" : 
+    {
+      "Avg API Time (ns)" : 11832,
+      "Avg GPU Time (ns)" : 2816,
+      "Direction" : "",
+      "Max API Time (ns)" : 11832,
+      "Max GPU Time (ns)" : 2816,
+      "Min API Time (ns)" : 11832,
+      "Min GPU Time (ns)" : 2816,
+      "Op ID" : "\"VECTORIZED_ELEMENTWISE_KERNEL_999\"",
+      "Op Name" : "\"unassociated_vectorized_elementwise_kernel\"",
+      "Total API Time (ns)" : 11832,
+      "Total GPU Time (ns)" : 2816,
+      "Uses TC" : "no"
+    }
+  }
+}

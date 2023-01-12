@@ -1,0 +1,110 @@
+{
+  "Op Type Summary Report" : 
+  {
+    "\"cudaDeviceSynchronize_v3020\"" : 
+    {
+      "# Calls" : 1001,
+      "# Ops" : 1001,
+      "Avg. CPU Overhead (ns)" : 0,
+      "Avg. CPU Time (ns)" : 6562.397602397602,
+      "Avg. GPU Idle (ns)" : 0,
+      "Avg. GPU Time (ns)" : 0,
+      "Max CPU Overhead (ns)" : 0,
+      "Max CPU Time (ns)" : 22438,
+      "Max GPU Idle (ns)" : 0,
+      "Max GPU Time (ns)" : 0,
+      "Min CPU Overhead (ns)" : 0,
+      "Min CPU Time (ns)" : 5897,
+      "Min GPU Idle (ns)" : 0,
+      "Min GPU Time (ns)" : 0,
+      "Total CPU Overhead (ns)" : 0,
+      "Total CPU Time (ns)" : 6568960,
+      "Total GPU Idle (ns)" : 0,
+      "Total GPU Time (ns)" : 0
+    },
+    "\"new_zeros\"" : 
+    {
+      "# Calls" : 3003,
+      "# Ops" : 3003,
+      "Avg. CPU Overhead (ns)" : 29055.163836163836,
+      "Avg. CPU Time (ns)" : 34970.482184482185,
+      "Avg. GPU Idle (ns)" : 0,
+      "Avg. GPU Time (ns)" : 892.75024975024974,
+      "Max CPU Overhead (ns)" : 169150,
+      "Max CPU Time (ns)" : 206267,
+      "Max GPU Idle (ns)" : 0,
+      "Max GPU Time (ns)" : 3584,
+      "Min CPU Overhead (ns)" : 20235,
+      "Min CPU Time (ns)" : 20235,
+      "Min GPU Idle (ns)" : 0,
+      "Min GPU Time (ns)" : 0,
+      "Total CPU Overhead (ns)" : 87252657,
+      "Total CPU Time (ns)" : 105016358,
+      "Total GPU Idle (ns)" : 0,
+      "Total GPU Time (ns)" : 2680929
+    },
+    "\"retain_grad\"" : 
+    {
+      "# Calls" : 2,
+      "# Ops" : 2,
+      "Avg. CPU Overhead (ns)" : 8269,
+      "Avg. CPU Time (ns)" : 8269,
+      "Avg. GPU Idle (ns)" : 0,
+      "Avg. GPU Time (ns)" : 0,
+      "Max CPU Overhead (ns)" : 12005,
+      "Max CPU Time (ns)" : 12005,
+      "Max GPU Idle (ns)" : 0,
+      "Max GPU Time (ns)" : 0,
+      "Min CPU Overhead (ns)" : 4533,
+      "Min CPU Time (ns)" : 4533,
+      "Min GPU Idle (ns)" : 0,
+      "Min GPU Time (ns)" : 0,
+      "Total CPU Overhead (ns)" : 16538,
+      "Total CPU Time (ns)" : 16538,
+      "Total GPU Idle (ns)" : 0,
+      "Total GPU Time (ns)" : 0
+    },
+    "\"roi_align_forward_cuda_kernel\"" : 
+    {
+      "# Calls" : 1001,
+      "# Ops" : 1001,
+      "Avg. CPU Overhead (ns)" : 0,
+      "Avg. CPU Time (ns)" : 16968.238761238761,
+      "Avg. GPU Idle (ns)" : 0,
+      "Avg. GPU Time (ns)" : 7250.0139860139861,
+      "Max CPU Overhead (ns)" : 0,
+      "Max CPU Time (ns)" : 49325,
+      "Max GPU Idle (ns)" : 0,
+      "Max GPU Time (ns)" : 12448,
+      "Min CPU Overhead (ns)" : 0,
+      "Min CPU Time (ns)" : 15069,
+      "Min GPU Idle (ns)" : 0,
+      "Min GPU Time (ns)" : 7135,
+      "Total CPU Overhead (ns)" : 0,
+      "Total CPU Time (ns)" : 16985207,
+      "Total GPU Idle (ns)" : 0,
+      "Total GPU Time (ns)" : 7257264
+    },
+    "\"tensor\"" : 
+    {
+      "# Calls" : 2,
+      "# Ops" : 2,
+      "Avg. CPU Overhead (ns)" : 532845,
+      "Avg. CPU Time (ns)" : 774657257.5,
+      "Avg. GPU Idle (ns)" : 0,
+      "Avg. GPU Time (ns)" : 1344,
+      "Max CPU Overhead (ns)" : 992993,
+      "Max CPU Time (ns)" : 1549220593,
+      "Max GPU Idle (ns)" : 0,
+      "Max GPU Time (ns)" : 1824,
+      "Min CPU Overhead (ns)" : 72697,
+      "Min CPU Time (ns)" : 93922,
+      "Min GPU Idle (ns)" : 0,
+      "Min GPU Time (ns)" : 864,
+      "Total CPU Overhead (ns)" : 1065690,
+      "Total CPU Time (ns)" : 1549314515,
+      "Total GPU Idle (ns)" : 0,
+      "Total GPU Time (ns)" : 2688
+    }
+  }
+}
